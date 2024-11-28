@@ -10,7 +10,7 @@
     "madic-creates"
   ],
   "repositories": [
-    "madic-creates/vagrant-libvirt-ansible "
+    "madic-creates/vagrant-libvirt-ansible"
   ],
   "gitAuthor": "Renovate Bot <bot@renovateapp.com>",
   "prConcurrentLimit": 0,
