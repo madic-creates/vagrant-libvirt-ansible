@@ -1,22 +1,22 @@
 # vagrant-libvirt-ansible
 
-This container is based upon [vagrant-libvirt](https://github.com/vagrant-libvirt/vagrant-libvirt) slim container and adds ansible as configuration plugin.
+This container builds upon the [vagrant-libvirt](https://github.com/vagrant-libvirt/vagrant-libvirt) slim container by adding Ansible as provisioner.
 
-It can be used as a drop-in replacement for the [official vagrant libvirt container](https://vagrant-libvirt.github.io/vagrant-libvirt/installation.html#docker--podman).
+You can use this as a direct replacement for the [official vagrant-libvirt container](https://vagrant-libvirt.github.io/vagrant-libvirt/installation.html#docker--podman).
 
-I prefer to use the vagrant-libvirt container because my desktop os of choice, arch linux, has newer versions of packages as vagrant libvirt requires and because of this makes it real hard to use.
+I prefer to use the vagrant-libvirt container because my preferred desktop OS, Arch Linux, offers newer package versions, which are incompatible with the vagrant-libvirt requirements.
 
-But by default the container does not contain ansible and I need it to provision virtual machines, especially for the test environment of my [k3s-git-ops project](https://github.com/madic-creates/k3s-git-ops).
+However, the default container does not include Ansible, which I need to provision virtual machines, particularly for testing my [k3s-git-ops project](https://github.com/madic-creates/k3s-git-ops).
 
-## Pull
+## Pull the Container
 
 ```shell
 docker pull ghcr.io/madic-creates/vagrant-libvirt-ansible:latest
 ```
 
-## Alias
+## Create an Alias
 
-Add the following to your bash / zsh config to use the container with the regular ```vagrant``` command
+To use the container as the standard `vagrant` command, add the following function to your bash/zsh configuration:
 
 ```shell
 function vagrant() {
@@ -32,7 +32,7 @@ function vagrant() {
 }
 ```
 
-## Build manually
+## Build the Container Manually
 
 ```shell
 docker build -f Containerfile .
