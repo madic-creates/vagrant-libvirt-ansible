@@ -7,7 +7,7 @@ It can be used as a drop-in replacement for the [official vagrant libvirt contai
 ## Pull
 
 ```shell
-docker pull ghcr.io/madic-/vagrant-libvirt-ansible:latest
+docker pull ghcr.io/madic-creates/vagrant-libvirt-ansible:latest
 ```
 
 ## Build manually
