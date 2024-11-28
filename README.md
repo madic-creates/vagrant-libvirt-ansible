@@ -16,18 +16,20 @@ docker pull ghcr.io/madic-creates/vagrant-libvirt-ansible:latest
 
 ## Alias
 
-Add the following to your bash / zsh config
+Add the following to your bash / zsh config to use the container with the regular ```vagrant``` command
 
 ```shell
-docker run -it --rm \
-  -e LIBVIRT_DEFAULT_URI \
-  -v /var/run/libvirt/:/var/run/libvirt/ \
-  -v ~/.vagrant.d:/.vagrant.d \
-  -v $(realpath "${PWD}"):${PWD} \
-  -w "${PWD}" \
-  --network host \
-  ghcr.io/madic-creates/vagrant-libvirt-ansible:latest \
-    vagrant status
+function vagrant() {
+  docker run -it --rm \
+    -e LIBVIRT_DEFAULT_URI \
+    -v /var/run/libvirt/:/var/run/libvirt/ \
+    -v ~/.vagrant.d:/.vagrant.d \
+    -v $(realpath "${PWD}"):${PWD} \
+    -w "${PWD}" \
+    --network host \
+    ghcr.io/madic-creates/vagrant-libvirt-ansible:latest \
+      vagrant $@
+}
 ```
 
 ## Build manually
