@@ -1,0 +1,44 @@
+---
+name: Run renovatebot for updates
+
+on:
+  # Allows manual/automated ad-hoc trigger
+  workflow_dispatch:
+    inputs:
+      dryRun:
+        description: "Configure Dry Run"
+        required: true
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+      logLevel:
+        description: "Override log level"
+        required: true
+        default: "debug"
+        type: choice
+        options:
+          - info
+          - debug
+  schedule:
+    - cron: "0 2 * * *" # daily at 2 o'clock
+
+concurrency: renovate
+jobs:
+  renovate:
+    name: Renovate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Run Renovate
+        uses: renovatebot/github-action@v41.0.3
+        with:
+          configurationFile: ".github/renovate.json5"
+          token: ${{ secrets.RENOVATE_TOKEN }}
+        env:
+          LOG_LEVEL: ${{ github.event.inputs.logLevel || 'info' }}
+          # github.event.inputs converts the boolean into string. inputs doesn't
+          # https://docs.github.com/en/enterprise-cloud@latest/actions/writing-workflows/workflow-syntax-for-github-actions#onworkflow_dispatchinputs
+          RENOVATE_DRY_RUN: ${{ github.event.inputs.dryRun || 'false' }}
