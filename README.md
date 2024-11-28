@@ -1,6 +1,6 @@
 # vagrant-libvirt-ansible
 
-This container is based upon [vagrant-libvirt](https://github.com/vagrant-libvirt/vagrant-libvirt) container and adds ansible as configuration plugin.
+This container is based upon [vagrant-libvirt](https://github.com/vagrant-libvirt/vagrant-libvirt) slim container and adds ansible as configuration plugin.
 
 It can be used as a drop-in replacement for the [official vagrant libvirt container](https://vagrant-libvirt.github.io/vagrant-libvirt/installation.html#docker--podman).
 
@@ -12,6 +12,22 @@ But by default the container does not contain ansible and I need it to provision
 
 ```shell
 docker pull ghcr.io/madic-creates/vagrant-libvirt-ansible:latest
+```
+
+## Alias
+
+Add the following to your bash / zsh config
+
+```shell
+docker run -it --rm \
+  -e LIBVIRT_DEFAULT_URI \
+  -v /var/run/libvirt/:/var/run/libvirt/ \
+  -v ~/.vagrant.d:/.vagrant.d \
+  -v $(realpath "${PWD}"):${PWD} \
+  -w "${PWD}" \
+  --network host \
+  ghcr.io/madic-creates/vagrant-libvirt-ansible:latest \
+    vagrant status
 ```
 
 ## Build manually
